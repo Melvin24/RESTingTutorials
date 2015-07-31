@@ -9,4 +9,38 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- this servelet is used to define a restfult API -->
+  <servlet> <!-- this runs in a server application it is simply a class that responds to a particular request generally HTTP. HTTP request->web application->corresponding servlet gets executed -->
+    <servlet-name>Jersey REST Service</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class><!-- Find all the libraries it needs to create this web service -->
+    <init-param>
+      <param-name>com.sun.jersey.config.property.packages</param-name><!-- package it needs -->
+      <param-value>com.youtube.rest</param-value><!--project name-->
+    </init-param>
+    <load-on-startup>1</load-on-startup> <!--first servelet to boot up hence the number 1, if it was the second it would have been 2 instead -->
+  </servlet>
+  <servlet-mapping><!-- this container is used so that any URL with char 'api' we want to rout it to this servelet-->
+    <servlet-name>Jersey REST Service</servlet-name>
+    <url-pattern>/api/*</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
+
+<!--
+HOW IT WORKS!!!
+the 'web.xml' file is the GATE KEEPER Goes through here first
+1. first when the user types in the ROOT URL "localhost:7001/com.youtube.rest/" it will
+   look at the 'welcome-file-list'  container tag and look at the possible HTML file that it can return
+   and then return the first file in the herarchy
+2. But if the the URL has /api/* followed by the root URL then it will route it
+   to our Java code in the 'V!_status' class   
+3. One it is in the java code it looks at the path i.e v1/status/* then route it in the the public class
+   called V1_status
+4. in this class we have a '@GET' method this is because the browser is performing a 'GET'
+   on the URL path specified so if it was a @POST it throws some kind of error
+   once it identifies that there is a GET Method then it execute the returnTitle()
+   method by producing a .html page. 
+
+
+-->
