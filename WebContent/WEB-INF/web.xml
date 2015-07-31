@@ -2,6 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>com.youtube.rest</display-name>
   <welcome-file-list>
+  	<welcome-file>readMe.html</welcome-file>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
@@ -16,7 +17,7 @@
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class><!-- Find all the libraries it needs to create this web service -->
     <init-param>
       <param-name>com.sun.jersey.config.property.packages</param-name><!-- package it needs -->
-      <param-value>com.youtube.rest</param-value><!--project name-->
+      <param-value>com.youtube.rest.status</param-value><!--project name-->
     </init-param>
     <load-on-startup>1</load-on-startup> <!--first servelet to boot up hence the number 1, if it was the second it would have been 2 instead -->
   </servlet>
@@ -33,9 +34,9 @@ the 'web.xml' file is the GATE KEEPER Goes through here first
 1. first when the user types in the ROOT URL "localhost:7001/com.youtube.rest/" it will
    look at the 'welcome-file-list'  container tag and look at the possible HTML file that it can return
    and then return the first file in the herarchy
-2. But if the the URL has /api/* followed by the root URL then it will route it
-   to our Java code in the 'V!_status' class   
-3. One it is in the java code it looks at the path i.e v1/status/* then route it in the the public class
+2. But if the URL has /api/* followed by the root URL then it will route it
+   to our Java code in the 'V1_status' class   
+3. Once it is in the java code it looks at the path i.e v1/status/* then route it on to the public class
    called V1_status
 4. in this class we have a '@GET' method this is because the browser is performing a 'GET'
    on the URL path specified so if it was a @POST it throws some kind of error
